@@ -19,22 +19,13 @@ class SinaNewsPageProcessor(PageProcess):
 
     def process(self, page):
         """处理一个页面 将页面的种子url添加到页面调度器中，同时对页面内容进行爬取"""
-        res_html = etree.HTML(page.getContent())
-        a_elements = res_html.xpath("//a/@href")
-
-        # 爬去新的页面添加到任务管理器中
-        for a_element in a_elements:
-            if a_element.find("javascript") >= 0 or a_element.find("#") >= 0:
-                continue
-            if a_element.find(page.base_url) == -1:
-                continue
-            page.put_url(a_element)
+        res_html = self.handler(page)
         # 爬去新闻内容
         article_dict = self.fetchArticle(res_html)
         article_dict.setdefault("url", )
         article_dict.setdefault("create_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())))
         article_dict.setdefault("_id", abs(hash(page.url)))
-        page.put_fields(article_dict)
+        page.put_field_dict(article_dict)
 
     def fetchArticle(self, html):
         """抓取页面内容"""

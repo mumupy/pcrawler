@@ -14,4 +14,5 @@ class ConsoleStorage(Storage):
     """将数据直接打印在控制台"""
 
     def storage(self, field_dict):
-        logging.info(json.dumps(field_dict,ensure_ascii=False))
+        if field_dict:
+            logging.info(json.dumps(field_dict,ensure_ascii=False))

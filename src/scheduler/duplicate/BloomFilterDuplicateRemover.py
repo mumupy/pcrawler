@@ -5,7 +5,9 @@
 # @File    : BloomFilterDuplicateRemover.py
 # @Desc    : bloomFilter数据去重
 from pybloom import BloomFilter
+
 from src.scheduler.duplicate.DuplicateRemover import DuplicateRemover
+
 
 class BloomFilterDuplicateRemover(DuplicateRemover):
 
@@ -13,8 +15,16 @@ class BloomFilterDuplicateRemover(DuplicateRemover):
         self.bloomFilter = BloomFilter(capacity, error_rate)
 
     def dump(self, url):
-        url_hash = abs(hash(url))
-        return self.bloomFilter.add(url_hash)
+        """检查是否存在url 如果存在返回True 否则False"""
+        url_hash = self.url_hash(url)
+        return self.bloomFilter.__contains__(url_hash)
+
+    def add(self, url):
+        url_hash = self.url_hash(url)
+        self.bloomFilter.add(url_hash)
+
+    def count(self):
+        return self.bloomFilter.count
 
 
 if __name__ == "__main__":

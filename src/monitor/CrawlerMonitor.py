@@ -5,15 +5,27 @@
 # @File    : CrawlerMonitor.py
 # @Desc    : 监控线程
 import threading
+import time
+
+from src.config.Config import logging
 
 
 class CrawlerMonitor(threading.Thread):
 
-    def __init__(self, crawler):
+    def __init__(self, crawler, sleep_time=60):
         super(CrawlerMonitor, self).__init__()
         self.crawler = crawler
+        self.sleep_time = sleep_time
         self.setName("crawler-monitor-thread")
 
     def monitor(self):
-        # 待爬取的url数量
-        self.crawler.schedular.waiting_count()
+        while True:
+            # 待爬取的url数量
+            time.sleep(self.sleep_time)
+            monitorModel = self.crawler.monitorModel.statistical()
+            logging.info("statistical: success[{0}] failure [{1}] schedular[{2}] duplicate [{3}]".format(
+                monitorModel.success_count, monitorModel.fail_count, monitorModel.crawler_count,
+                monitorModel.duplicate_count))
+
+    def run(self):
+        self.monitor()

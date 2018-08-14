@@ -4,15 +4,23 @@
 # @Author  : ganliang
 # @File    : Schedular.py
 # @Desc    : 页面调度器
-class Schedular:
+from src.scheduler.duplicate.HashSetDuplicateRemover import HashSetDuplicateRemover
+
+
+class Schedular(object):
+
+    def __init__(self, base_url):
+        self.duplicate_remover = HashSetDuplicateRemover()
+        self.base_url = base_url
+
     def get_url(self):
+        """从url管理器中取出一个url 进行数据爬取"""
         pass
 
     def put_url(self, url):
+        """将待爬取的页面添加到控制器中"""
         pass
 
-    def waiting_count(self):
-        pass
-
-    def handle_count(self):
+    def count(self):
+        """计算待爬取的页面数量"""
         pass
