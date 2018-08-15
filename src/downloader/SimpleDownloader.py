@@ -6,8 +6,6 @@
 # @Desc    : 基本下载器
 import urllib2
 
-import chardet
-
 from src.config.Config import logging
 
 
@@ -17,12 +15,17 @@ class SimpleDownloader:
     def download(self, url):
         """下载html 返回html内容"""
         try:
-            content = urllib2.urlopen(url).read()
-            char_encoding = chardet.detect(content)
-            encoding = char_encoding.get("encoding", "utf-8")
-            if str(encoding).upper() == "GB2312":
-                encoding = "gbk"
-            return unicode(content, encoding=encoding)
+            content = str(urllib2.urlopen(url, timeout=5).read())
+            # 获取html内容的content-type标签 找到html编码
+            content_type_start_index = content.find("Content-Type")
+            if content_type_start_index > -1:
+                charset_start_index = content.find("charset=", content_type_start_index)
+                content_type_end_index = content.find(">", content_type_start_index)
+                encoding = content[charset_start_index + len("charset="):content_type_end_index - 3]
+                if str(encoding).upper() == "GB2312":
+                    encoding = "gbk"
+                content = unicode(content, encoding=encoding)
+            return content
         except Exception as ex:
             logging.error(ex)
         return None

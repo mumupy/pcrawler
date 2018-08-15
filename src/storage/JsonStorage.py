@@ -24,12 +24,14 @@ class JsonStorage(Storage):
         self.json_file = open(os.path.join(self.json_path, str(int(time.time() * 1000)) + ".json"), "w")
 
     def storage(self, json_data):
+        if not json_data:
+            return
         if self.current_counter >= self.file_counter:
             self.json_file.close()
             self.json_file = open(os.path.join(self.json_path, str(int(time.time() * 1000)) + ".json"), "w")
             self.current_counter = 0
 
-        article = json.dumps(json_data,ensure_ascii=False)
+        article = json.dumps(json_data, ensure_ascii=False)
         logging.info(article)
         self.json_file.write(article + "\n")
         self.current_counter += 1

@@ -22,10 +22,20 @@ class SinaNewsPageProcessor(PageProcess):
         res_html = self.handler(page)
         # 爬去新闻内容
         article_dict = self.fetchArticle(res_html)
+        # 如果文件内容不存在 则过滤该数据
+        if filter(page, article_dict):
+            return
         article_dict.setdefault("url", )
         article_dict.setdefault("create_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())))
         article_dict.setdefault("_id", abs(hash(page.url)))
         page.put_field_dict(article_dict)
+
+    def filter(self, page, article_dict):
+        """爬去的内容是否过滤"""
+        if not article_dict.get("article_content"):
+            page.is_filter = True
+            return True
+        return False
 
     def fetchArticle(self, html):
         """抓取页面内容"""

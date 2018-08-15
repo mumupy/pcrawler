@@ -23,9 +23,10 @@ class CrawlerMonitor(threading.Thread):
             # 待爬取的url数量
             time.sleep(self.sleep_time)
             monitorModel = self.crawler.monitorModel.statistical()
-            logging.info("statistical: success[{0}] failure [{1}] schedular[{2}] duplicate [{3}]".format(
+            logging.info("statistical: success[{0}] failure [{1}] schedular[{2}] duplicate [{3}] filter [ {4} ]".format(
                 monitorModel.success_count, monitorModel.fail_count, monitorModel.crawler_count,
-                monitorModel.duplicate_count))
+                monitorModel.duplicate_count, monitorModel.filter_count))
+            logging.info("filter url {0}".format("\n".join(monitorModel.filter_urls)))
 
     def run(self):
         self.monitor()

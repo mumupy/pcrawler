@@ -15,7 +15,7 @@ from src.storage.MediaStorage import MediaStorage
 def hubei_news():
     """湖北新浪新闻"""
     Crawler("http://hb.sina.com.cn/news/", SinaNewsPageProcessor()) \
-        .set_thread(10) \
+        .set_thread(100) \
         .set_storage(JsonStorage("D:/data/sina/hunews")) \
         .run()
 

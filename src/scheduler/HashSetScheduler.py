@@ -15,8 +15,8 @@ class HashSetScheduler(Schedular):
 
     def __init__(self, base_url):
         super(HashSetScheduler, self).__init__(base_url)
-        self.urls = list()  # set 不是线程安全的
-        self.urls.append(self.base_url)
+        self.urls = set()  # set 不是线程安全的
+        self.urls.add(self.base_url)
         self.scheduler_lock = threading.Lock()
 
     def set_duplicate_remover(self, duplicate_remover):
@@ -34,7 +34,7 @@ class HashSetScheduler(Schedular):
                     else:
                         raise TypeError("页面无数据")
                 else:
-                    page_url = self.urls.pop(0)
+                    page_url = self.urls.pop()
                     logging.info(page_url)
                     return page_url
         except Exception as ex:
@@ -45,7 +45,7 @@ class HashSetScheduler(Schedular):
 
     def put_url(self, url):
         if url not in self.urls and not self.duplicate_remover.dump(url):
-            self.urls.append(url)
+            self.urls.add(url)
 
     def put_urls(self, urls):
         for url in urls:

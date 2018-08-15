@@ -5,8 +5,9 @@
 # @File    : Crawler.py
 # @Desc    : 爬虫核心入口
 
-import threading
 import sys
+import threading
+
 from src.core.Page import Page
 from src.downloader.SimpleDownloader import SimpleDownloader
 from src.monitor.CrawlerMonitor import CrawlerMonitor
@@ -96,6 +97,9 @@ class CrawlerExecution(threading.Thread):
             page = Page(url, self.crawler.base_url, self.crawler.filter_url, self.crawler).setContent(content)
             # 页面逻辑处理
             self.crawler.pageProcess.process(page)
+            if page.is_filter:
+                self.crawler.monitorModel.filter(url)
+                continue
             # 保存页面
             self.crawler.storage.storage(page.field_dict)
 

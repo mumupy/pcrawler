@@ -5,13 +5,14 @@
 # @File    : Page.py
 # @Desc    : 页面内容信息
 class Page:
-    def __init__(self, url, base_url,filter_url, crawler):
+    def __init__(self, url, base_url, filter_url, crawler):
         self.url = url
         self.base_url = base_url
         self.filter_url = filter_url
         self.content = None
         self.crawler = crawler
         self.field_dict = {}
+        self.is_filter = False
 
     def setContent(self, content):
         self.content = content

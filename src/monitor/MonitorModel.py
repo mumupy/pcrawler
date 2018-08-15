@@ -13,6 +13,8 @@ class MonitorModel(object):
         self.start_time = None
         self.crawler_count = 0
         self.duplicate_count = 0
+        self.filter_count = 0
+        self.filter_urls = set()
 
     def success(self):
         self.success_count += 1
@@ -26,3 +28,7 @@ class MonitorModel(object):
         self.crawler_count = self.crawler.schedular.count()
         self.duplicate_count = self.crawler.schedular.duplicate_remover.count()
         return self
+
+    def filter(self, url):
+        self.filter_count += 1
+        self.filter_urls.add(url)
