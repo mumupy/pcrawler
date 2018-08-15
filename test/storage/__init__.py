@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2018/8/1 21:07
+# @Time    : 2018/8/15 13:06
 # @Author  : ganliang
 # @File    : __init__.py.py
-# @Desc    : 爬虫配置类
-import sys
-print("\n".join(sys.path))
+# @Desc    : Storage包测试代码

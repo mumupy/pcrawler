@@ -6,7 +6,7 @@
 # @Desc    : 爬虫核心入口
 
 import threading
-
+import sys
 from src.core.Page import Page
 from src.downloader.SimpleDownloader import SimpleDownloader
 from src.monitor.CrawlerMonitor import CrawlerMonitor
@@ -74,9 +74,17 @@ class CrawlerExecution(threading.Thread):
         self.setName("crawler-execution-{0}-thread".format(thread_index))
 
     def run(self):
+        PAGE_NOTFOUND_COUNTER = 0
         while True:
             # 从页面管理器中获取页面
             url = self.crawler.schedular.get_url()
+            if not url:
+                PAGE_NOTFOUND_COUNTER += 1
+                if (PAGE_NOTFOUND_COUNTER <= 10):
+                    continue
+                else:
+                    sys.exit(-1)
+            PAGE_NOTFOUND_COUNTER = 0
             # 下载该页面 获取页面内容
             content = self.crawler.downloader.download(url)
             # 将url添加到去重器中
@@ -85,7 +93,7 @@ class CrawlerExecution(threading.Thread):
                 self.crawler.monitorModel.failure()
                 continue
             self.crawler.monitorModel.success()
-            page = Page(url, self.crawler.base_url,self.crawler.filter_url, self.crawler).setContent(content)
+            page = Page(url, self.crawler.base_url, self.crawler.filter_url, self.crawler).setContent(content)
             # 页面逻辑处理
             self.crawler.pageProcess.process(page)
             # 保存页面

@@ -41,6 +41,7 @@ class HashSetScheduler(Schedular):
             logging.error(ex)
         finally:
             self.scheduler_lock.release()
+        return None
 
     def put_url(self, url):
         if url not in self.urls and not self.duplicate_remover.dump(url):

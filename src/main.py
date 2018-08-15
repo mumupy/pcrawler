@@ -4,14 +4,13 @@
 # @Author  : ganliang
 # @File    : Crawler.py
 # @Desc    : 爬虫核心入口
+import os
+import sys
 
-from src.core.Crawler import Crawler
-from src.processor.builtin.VedioPageProcess import VedioPageProcess
+# 将项目添加到pythonpath环境变量中
+project_dir = os.path.dirname(os.getcwd())
+sys.path.append(project_dir)
+print(sys.path)
 
 if __name__ == "__main__":
-    # 湖北新浪新闻
-    # crawler = Crawler("http://hb.sina.com.cn/news/", SinaNewsPageProcessor()) \
-    #     .set_thread(20) \
-    #     .run()
-    # Crawler("http://www.xiaohuar.com/", ImagePageProcess()).run()
-    Crawler("http://www.xiaohuar.com/v/", VedioPageProcess(), filter_url="http://www.xiaohuar.com/").run()
+    pass
