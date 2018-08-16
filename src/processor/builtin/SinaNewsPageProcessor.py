@@ -23,9 +23,9 @@ class SinaNewsPageProcessor(PageProcess):
         # 爬去新闻内容
         article_dict = self.fetchArticle(res_html)
         # 如果文件内容不存在 则过滤该数据
-        if filter(page, article_dict):
+        if self.filter(page, article_dict):
             return
-        article_dict.setdefault("url", )
+        article_dict.setdefault("url",page.url)
         article_dict.setdefault("create_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())))
         article_dict.setdefault("_id", abs(hash(page.url)))
         page.put_field_dict(article_dict)

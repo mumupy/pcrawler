@@ -15,4 +15,7 @@ class ConsoleStorage(Storage):
 
     def storage(self, field_dict):
         if field_dict:
-            logging.info(json.dumps(field_dict,ensure_ascii=False))
+            if isinstance(field_dict, dict):
+                logging.info(json.dumps(field_dict, ensure_ascii=False))
+            else:
+                logging.info(field_dict)

@@ -8,6 +8,8 @@
 def getElement(res_html, xpath):
     if res_html is None:
         return ""
+    if isinstance(res_html, list):
+        res_html = res_html[0]
     tag_elements = res_html.xpath(xpath)
     if not tag_elements:
         return ""

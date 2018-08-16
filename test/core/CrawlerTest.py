@@ -8,6 +8,8 @@ from src.core.Crawler import Crawler
 from src.processor.builtin.ImagePageProcess import ImagePageProcess
 from src.processor.builtin.SinaNewsPageProcessor import SinaNewsPageProcessor
 from src.processor.builtin.VedioPageProcess import VedioPageProcess
+from src.processor.loophole.NsfocusLoopholePageProcess import NsfocusLoopholePageProcess
+from src.scheduler.duplicate.BloomFilterDuplicateRemover import BloomFilterDuplicateRemover
 from src.storage.JsonStorage import JsonStorage
 from src.storage.MediaStorage import MediaStorage
 
@@ -15,8 +17,9 @@ from src.storage.MediaStorage import MediaStorage
 def hubei_news():
     """湖北新浪新闻"""
     Crawler("http://hb.sina.com.cn/news/", SinaNewsPageProcessor()) \
-        .set_thread(100) \
+        .set_thread(10) \
         .set_storage(JsonStorage("D:/data/sina/hunews")) \
+        .set_duplicate_remover(BloomFilterDuplicateRemover()) \
         .run()
 
 
@@ -35,5 +38,14 @@ def xiaohuar_media():
         .run()
 
 
+def nsfocus_loophole():
+    """绿盟漏洞爬取"""
+    Crawler("http://www.nsfocus.net/index.php?act=sec_bug",
+            NsfocusLoopholePageProcess(),
+            filter_url=["http://www.nsfocus.net/index.php?act=sec_bug", "http://www.nsfocus.net/vulndb"]) \
+        .run()
+
+
 if __name__ == "__main__":
-    hubei_news()
+    # hubei_news()
+    nsfocus_loophole()

@@ -21,10 +21,10 @@ class Crawler(threading.Thread):
     def __init__(self, base_url, pageProcess, thread_count=1, filter_url=None):
         super(Crawler, self).__init__()
         self.setName("crawler-thread")
-        if not str(base_url).endswith("/"):
-            base_url = base_url + "/"
+        # if not str(base_url).endswith("/"):
+        #     base_url = base_url + "/"
         self.base_url = base_url
-        self.filter_url = filter_url if filter_url else base_url
+        self.filter_url = filter_url if filter_url else [base_url]
         self.pageProcess = pageProcess
         self.thread_count = thread_count
         self.schedular = HashSetScheduler(base_url)
