@@ -28,6 +28,9 @@ class PageProcess:
                 if a_element.startswith("/"):
                     a_element = a_element[1:]
                 a_element = os.path.join(base_url, a_element).replace("\\", "/")
+                relative_index = a_element.find("/../")
+                if relative_index > -1:
+                    a_element = a_element[:relative_index] + a_element[relative_index + 3:]
             filter = True
             for filter_url in page.filter_url:
                 if a_element.find(filter_url) > -1:

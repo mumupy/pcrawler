@@ -43,6 +43,7 @@ def nsfocus_loophole():
     Crawler("http://www.nsfocus.net/index.php?act=sec_bug",
             NsfocusLoopholePageProcess(),
             filter_url=["http://www.nsfocus.net/index.php?act=sec_bug", "http://www.nsfocus.net/vulndb"]) \
+        .set_storage(JsonStorage("D:/data/loophole/nsfocus/")) \
         .run()
 
 

@@ -7,6 +7,7 @@
 
 import sys
 import threading
+import traceback
 
 from src.core.Page import Page
 from src.downloader.SimpleDownloader import SimpleDownloader
@@ -77,31 +78,34 @@ class CrawlerExecution(threading.Thread):
     def run(self):
         PAGE_NOTFOUND_COUNTER = 0
         while True:
-            # 从页面管理器中获取页面
-            url = self.crawler.schedular.get_url()
-            if not url:
-                PAGE_NOTFOUND_COUNTER += 1
-                if (PAGE_NOTFOUND_COUNTER <= 10):
+            try:
+                # 从页面管理器中获取页面
+                url = self.crawler.schedular.get_url()
+                if not url:
+                    PAGE_NOTFOUND_COUNTER += 1
+                    if (PAGE_NOTFOUND_COUNTER <= 10):
+                        continue
+                    else:
+                        sys.exit(-1)
+                PAGE_NOTFOUND_COUNTER = 0
+                # 下载该页面 获取页面内容
+                content = self.crawler.downloader.download(url)
+                # 将url添加到去重器中
+                self.crawler.schedular.duplicate_remover.add(url)
+                if not content:
+                    self.crawler.monitorModel.failure()
                     continue
-                else:
-                    sys.exit(-1)
-            PAGE_NOTFOUND_COUNTER = 0
-            # 下载该页面 获取页面内容
-            content = self.crawler.downloader.download(url)
-            # 将url添加到去重器中
-            self.crawler.schedular.duplicate_remover.add(url)
-            if not content:
-                self.crawler.monitorModel.failure()
-                continue
-            self.crawler.monitorModel.success()
-            page = Page(url, self.crawler.base_url, self.crawler.filter_url, self.crawler).setContent(content)
-            # 页面逻辑处理
-            self.crawler.pageProcess.process(page)
-            if page.is_filter:
-                self.crawler.monitorModel.filter(url)
-                continue
-            # 保存页面
-            self.crawler.storage.storage(page.field_dict)
+                self.crawler.monitorModel.success()
+                page = Page(url, self.crawler.base_url, self.crawler.filter_url, self.crawler).setContent(content)
+                # 页面逻辑处理
+                self.crawler.pageProcess.process(page)
+                if page.is_filter:
+                    self.crawler.monitorModel.filter(url)
+                    continue
+                # 保存页面
+                self.crawler.storage.storage(page.field_dict)
+            except Exception as ex:
+                traceback.print_exc()
 
 
 if __name__ == "__main__":
