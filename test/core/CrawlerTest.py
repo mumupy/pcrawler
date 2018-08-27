@@ -4,6 +4,13 @@
 # @Author  : ganliang
 # @File    : CrawlerTest.py
 # @Desc    : 爬虫核心类测试
+import os
+import sys
+
+project_dir = os.path.dirname(os.path.dirname(os.getcwd()))
+sys.path.append(project_dir)
+print(sys.path)
+
 from src.core.Crawler import Crawler
 from src.processor.builtin.ImagePageProcess import ImagePageProcess
 from src.processor.builtin.SinaNewsPageProcessor import SinaNewsPageProcessor
@@ -48,5 +55,5 @@ def nsfocus_loophole():
 
 
 if __name__ == "__main__":
-    # hubei_news()
-    nsfocus_loophole()
+    hubei_news()
+    # nsfocus_loophole()

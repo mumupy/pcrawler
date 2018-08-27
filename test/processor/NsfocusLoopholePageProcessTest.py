@@ -16,8 +16,10 @@ def process(url):
     content = simpleDownloader.download(url)
     res_html = etree.HTML(content)
 
-    vulbar_content_element = res_html.xpath("//div[@class='vulbar']")[0]
-
+    vulbar_content_elements = res_html.xpath("//div[@class='vulbar']")
+    if not vulbar_content_elements:
+        return
+    vulbar_content_element = vulbar_content_elements[0]
     title = getElement(vulbar_content_element, "//div[@align='center']/b/text()")
     logging.info("title:" + title)
 
@@ -57,7 +59,7 @@ def process(url):
     desc2 = main_content[desc_before_index:desc_after_index]
     logging.info("desc:" + desc2)
 
-    advisory_begin_index = main_content.rfind("厂商补丁：<br/>") + len("厂商补丁：<br/>")+6
+    advisory_begin_index = main_content.rfind("厂商补丁：<br/>") + len("厂商补丁：<br/>") + 6
     advisory_end_index = main_content.rfind("&#13;")
     advisory = main_content[advisory_begin_index:advisory_end_index]
     logging.info("advisory:" + advisory)

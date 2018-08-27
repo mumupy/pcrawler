@@ -15,6 +15,7 @@ def install():
     os.system("pip install pybloom")  # bloomfilter布隆过滤器
     os.system("pip install chardet")  # 自动识别字符串编码格式
     os.system("pip install ipip-datx")  # ipipnet的ip数据解析
+    os.system("pip install avro")  # avro数据存储格式
 
 
 def sitecustomize():
