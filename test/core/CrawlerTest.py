@@ -17,8 +17,8 @@ from src.processor.builtin.SinaNewsPageProcessor import SinaNewsPageProcessor
 from src.processor.builtin.VedioPageProcess import VedioPageProcess
 from src.processor.loophole.NsfocusLoopholePageProcess import NsfocusLoopholePageProcess
 from src.scheduler.duplicate.BloomFilterDuplicateRemover import BloomFilterDuplicateRemover
-from src.storage.JsonStorage import JsonStorage
-from src.storage.MediaStorage import MediaStorage
+from src.storage.basic.JsonStorage import JsonStorage
+from src.storage.basic.MediaStorage import MediaStorage
 
 
 def hubei_news():

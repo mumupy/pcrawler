@@ -5,7 +5,7 @@
 # @File    : MediaStorageTest.py
 # @Desc    : 多媒体内容下载测试代码
 
-from src.storage.MediaStorage import MediaStorage
+from src.storage.basic.MediaStorage import MediaStorage
 
 
 def storage():

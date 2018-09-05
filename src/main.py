@@ -12,5 +12,10 @@ project_dir = os.path.dirname(os.getcwd())
 sys.path.append(project_dir)
 print(sys.path)
 
+
+def runner():
+    print("hello world")
+
+
 if __name__ == "__main__":
-    pass
+    runner()
