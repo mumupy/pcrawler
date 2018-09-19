@@ -8,7 +8,7 @@ import urllib2
 
 import requests
 
-from src.storage.MediaStorage import MediaStorage
+from src.storage.basic.MediaStorage import MediaStorage
 
 
 def storage():
