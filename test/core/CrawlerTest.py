@@ -55,5 +55,6 @@ def nsfocus_loophole():
 
 
 if __name__ == "__main__":
-    hubei_news()
+    # hubei_news()
+    xiaohuar_media()
     # nsfocus_loophole()
