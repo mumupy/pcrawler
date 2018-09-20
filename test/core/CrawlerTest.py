@@ -18,7 +18,6 @@ from src.processor.builtin.VedioPageProcess import VedioPageProcess
 from src.processor.loophole.NsfocusLoopholePageProcess import NsfocusLoopholePageProcess
 from src.scheduler.duplicate.BloomFilterDuplicateRemover import BloomFilterDuplicateRemover
 from src.storage.JsonStorage import JsonStorage
-from src.storage.AvroStorage import AvroStorage
 from src.storage.MediaStorage import MediaStorage
 
 
@@ -26,7 +25,7 @@ def hubei_news():
     """湖北新浪新闻"""
     Crawler("http://hb.sina.com.cn/news/", SinaNewsPageProcessor()) \
         .set_thread(10) \
-        .set_storage(AvroStorage("I:/data/sina/hunews")) \
+        .set_storage(JsonStorage("D:/data/sina/hunews")) \
         .set_duplicate_remover(BloomFilterDuplicateRemover()) \
         .run()
 

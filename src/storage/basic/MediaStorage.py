@@ -30,7 +30,7 @@ class MediaStorage(Storage):
         for field_name in field_dict:
             field_values = field_dict.get(field_name)
             if not isinstance(field_values, list):
-                media_urls = [field_values]
+                field_values = [field_values]
             for field_value in field_values:
                 # 获取url路径名称
                 try:
@@ -38,8 +38,7 @@ class MediaStorage(Storage):
                     # 下载内容信息
                     content = urllib2.urlopen(field_value).read()
                     # 将内容写入到文件中
-                    media_file = open(os.path.join(self.out_path, os.path.split(field_value)[1]), "w")
-                    media_file.writelines(content)
-                    media_file.close()
+                    with open(os.path.join(self.out_path, os.path.split(field_value)[1]), "wb") as media_file:
+                        media_file.write(content)
                 except Exception as ex:
                     logging.error(ex)

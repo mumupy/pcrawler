@@ -1,0 +1,23 @@
+language: python
+
+cache:
+  directories:
+  - "$HOME/.cache/pip"
+  - "$HOME/.pyenv"
+
+python:
+  - "2.7"
+
+env:
+  - DJANGO_VERSION=1.11.5
+
+install:
+   - pip install -r requirements.txt
+
+script:
+  - python crawler.py image  http://www.xiaohuar.com/ /data/pcrawler/xiaohua
+
+
+after_success:
+  #- bash <(curl -s https://codecov.io/bash)
+  codecov
