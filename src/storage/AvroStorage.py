@@ -36,13 +36,13 @@ class AvroStorage(Storage):
         for json_key in json_data.keys():
             value = json_data.get(json_key)
             if isinstance(value, int):
-                fields.append((json_key, ["int", "long"]))
+                fields.append({"name": json_key, "type": ["int", "long","null"]})
             elif isinstance(value, float):
-                fields.append((json_key, "float"))
+                fields.append({"name": json_key, "type": ["float", "null"]})
             elif isinstance(value, long):
-                fields.append((json_key, "long"))
+                fields.append({"name": json_key, "type": ["long", "null"]})
             else:
-                fields.append((json_key, "string"))
+                fields.append({"name": json_key, "type": ["string", "null"]})
         return fields
 
     def set_avro_writer(self, json_data):

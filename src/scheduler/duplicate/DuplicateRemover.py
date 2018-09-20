@@ -4,7 +4,11 @@
 # @Author  : ganliang
 # @File    : DuplicateRemover.py
 # @Desc    : 数据去除重复
-class DuplicateRemover:
+class DuplicateRemover(object):
+
+    def __init__(self):
+        pass
+
     def dump(self, url):
         """检查是否存在url 如果存在返回True 否则False"""
         pass
