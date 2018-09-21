@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/mumupy/pcrawler.svg?branch=master)](https://travis-ci.org/mumupy/pcrawler)
 [![codecov](https://codecov.io/gh/mumupy/pcrawler/branch/master/graph/badge.svg)](https://codecov.io/gh/mumupy/pcrawler)
 [![pypi](https://img.shields.io/pypi/v/pcrawler.svg)](https://pypi.python.org/pypi/pcrawler)
-[![readthedocs](https://readthedocs.org/projects/pcrawler/badge/?version=latest)](https://pcrawler.readthedocs.io)  
+[![Documentation Status](https://readthedocs.org/projects/pcrawler/badge/?version=latest)](https://pcrawler.readthedocs.io/en/latest/?badge=latest)
 
 ***pcrawler是一款python版本的爬虫程序，通过该爬虫程序可以非常快速方便的编写一个自己的爬虫程序。pcrawler主要
 包含downloader、schedular、processor、storage四大组件组成。而且可以非常方便快捷的拓展各个组件。***
