@@ -13,10 +13,10 @@ from src.processor.builtin.VedioPageProcess import VedioPageProcess
 from src.processor.loophole.NsfocusLoopholePageProcess import NsfocusLoopholePageProcess
 from src.scheduler.duplicate.BloomFilterDuplicateRemover import BloomFilterDuplicateRemover
 from src.scheduler.duplicate.HashSetDuplicateRemover import HashSetDuplicateRemover
-from src.storage.AvroStorage import AvroStorage
 from src.storage.ConsoleStorage import ConsoleStorage
-from src.storage.JsonStorage import JsonStorage
-from src.storage.MediaStorage import MediaStorage
+from src.storage.basic.JsonStorage import JsonStorage
+from src.storage.basic.MediaStorage import MediaStorage
+from src.storage.hadoop.AvroStorage import AvroStorage
 
 
 def crawler_news(url, outpath, thread_count=10, storage="json", duplicateRemover="bloom"):
@@ -64,6 +64,7 @@ def crawler_images(url, outpath, thread_count=10, storage="json", duplicateRemov
         .set_storage(MediaStorage(outpath)) \
         .set_duplicate_remover(__get_duplicate_remover__(duplicateRemover)) \
         .run()
+
 
 def crawler_video(url, outpath, thread_count=10, duplicateRemover="bloom"):
     """爬取多媒体视频
