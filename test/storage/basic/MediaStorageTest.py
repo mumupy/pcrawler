@@ -6,8 +6,6 @@
 # @Desc    : 多媒体内容下载测试代码
 import urllib2
 
-import requests
-
 from src.storage.basic.MediaStorage import MediaStorage
 
 

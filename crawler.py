@@ -102,11 +102,15 @@ def __crawler_nsfocus__(args):
         logging.warn("usage: python crawler.py nsfocus outpath")
 
 
+def __crawler_travis__():
+    logging.info("travis success")
+
+
 def __get_outpath__(outpath):
     if str(outpath).startswith("/"):
         return outpath
     else:
-        return os.path.join(os.path.dirname(__file__), outpath).replace("\\","/")
+        return os.path.join(os.path.dirname(__file__), outpath).replace("\\", "/")
 
 
 if __name__ == "__main__":
@@ -120,5 +124,7 @@ if __name__ == "__main__":
         __crawler_video__(args[1:])
     elif operation == "NSFOCUS":
         __crawler_nsfocus__(args[1:])
+    elif operation == "TRAVIS":
+        __crawler_travis__()
     else:
-        logging.warn("usage: python crawler.py news|image|video|nsfocus")
+        logging.warn("usage: python crawler.py news|image|video|nsfocus|travis")

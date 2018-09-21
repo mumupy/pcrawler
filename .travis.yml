@@ -6,16 +6,16 @@ cache:
   - "$HOME/.pyenv"
 
 python:
-  - "2.7"
+- "2.7"
 
 env:
-  - DJANGO_VERSION=1.11.5
+- DJANGO_VERSION=1.11.5
 
 install:
-   - pip install -r requirements.txt
+- pip install -r requirements.txt
 
 script:
-  - python crawler.py image  http://www.xiaohuar.com/ data
+- python crawler.py travis
 
 
 after_success:
