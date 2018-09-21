@@ -16,8 +16,9 @@ install:
 
 script:
 - python crawler.py travis
-
+- coverage run crawler.py travis
+- coverage report
+- coverage html -d covhtml
 
 after_success:
-#  - bash <(curl -s https://codecov.io/bash)
-  - codecov
+- codecov
