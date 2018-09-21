@@ -15,7 +15,7 @@ install:
    - pip install -r requirements.txt
 
 script:
-  - python crawler.py image  http://www.xiaohuar.com/ /data/pcrawler/xiaohua
+  - python crawler.py image  http://www.xiaohuar.com/ data
 
 
 after_success:

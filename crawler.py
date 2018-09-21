@@ -32,7 +32,7 @@ def __crawler_news__(args):
         else:
             logging.warn("usage: python crawler.py news url outpath thread_count storage duplicateRemover")
             sys.exit(-1)
-        crawler_news(url, outpath, **params)
+        crawler_news(url, __get_outpath__(outpath), **params)
     else:
         logging.warn("usage: python crawler.py news url outpath")
 
@@ -55,7 +55,7 @@ def __crawler_image__(args):
         else:
             logging.warn("usage: python crawler.py image url outpath thread_count storage duplicateRemover")
             sys.exit(-1)
-        crawler_images(url, outpath, **params)
+        crawler_images(url, __get_outpath__(outpath), **params)
     else:
         logging.warn("usage: python crawler.py image url outpath")
 
@@ -74,7 +74,7 @@ def __crawler_video__(args):
         else:
             logging.warn("usage: python crawler.py video url outpath thread_count duplicateRemover")
             sys.exit(-1)
-        crawler_video(url, outpath, **params)
+        crawler_video(url, __get_outpath__(outpath), **params)
     else:
         logging.warn("usage: python crawler.py video url outpath")
 
@@ -97,9 +97,16 @@ def __crawler_nsfocus__(args):
         else:
             logging.warn("usage: python crawler.py nsfocus outpath thread_count storage duplicateRemover")
             sys.exit(-1)
-        crawler_nsfocus_loophole(outpath, **params)
+        crawler_nsfocus_loophole(__get_outpath__(outpath), **params)
     else:
         logging.warn("usage: python crawler.py nsfocus outpath")
+
+
+def __get_outpath__(outpath):
+    if str(outpath).startswith("/"):
+        return outpath
+    else:
+        return os.path.join(os.path.dirname(__file__), outpath).replace("\\","/")
 
 
 if __name__ == "__main__":
