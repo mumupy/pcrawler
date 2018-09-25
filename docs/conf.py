@@ -3,7 +3,7 @@
 # @Time    : 2018/9/21 17:32
 # @Author  : ganliang
 # @File    : conf.py
-# @Desc    : 将md文档转化为tst文档
+# @Desc    : 将md文档转化为rst文档
 
 from recommonmark.parser import CommonMarkParser
 
