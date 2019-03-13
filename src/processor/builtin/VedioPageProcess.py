@@ -16,3 +16,6 @@ class VedioPageProcess(PageProcess):
         video_urls = res_html.xpath("//video/source/@src")
         if video_urls:
             page.put_fields("video", video_urls)
+        video_urls = res_html.xpath("//video/@src")
+        if video_urls:
+            page.put_fields("video", video_urls)

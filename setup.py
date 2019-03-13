@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
   --formats=zip      ZIP file 
 """
 setup(name="pcrawler",
-      version="0.0.2",
+      version="0.0.1",
       description="python版本的爬虫程序。根据java版本的webmagic改编而成。该爬虫程序主要包含downloader、storage、processor、schemular等四大功能模块。通过该爬虫程序可以快速的编写一个自定义的爬虫程序。",
       long_description=open('README.md').read(),
       long_description_content_type="text/markdown",

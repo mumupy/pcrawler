@@ -45,6 +45,13 @@ def xiaohuar_media():
         .run()
 
 
+def xj940_media():
+    """视频爬取"""
+    Crawler("http://www.xj940.com/", VedioPageProcess()) \
+        .set_storage(MediaStorage("D:/data/xj940/video")) \
+        .run()
+
+
 def nsfocus_loophole():
     """绿盟漏洞爬取"""
     Crawler("http://www.nsfocus.net/index.php?act=sec_bug",
@@ -55,5 +62,5 @@ def nsfocus_loophole():
 
 
 if __name__ == "__main__":
-    hubei_news()
+    xj940_media()
     # nsfocus_loophole()
