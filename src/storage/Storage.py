@@ -6,6 +6,9 @@
 # @Desc    : 基础存储方式
 
 
-class Storage:
+class Storage(object):
+    def __init__(self):
+        pass
+
     def storage(self, field_dict):
         pass

@@ -3,3 +3,4 @@ pybloom
 lxml
 codecov
 recommonmark
+kafka

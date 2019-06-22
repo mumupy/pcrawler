@@ -44,5 +44,6 @@ class JsonStorage(Storage):
             self.current_counter += 1
         except Exception as ex:
             traceback.print_exc()
+            logging.error(json_data)
         finally:
             self.storage_lock.release()
